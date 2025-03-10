@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LayoutDashboard, CreditCard, DollarSign, List, Menu, X, LogOut, BarChart2 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 interface NavbarProps {
   currentPage: string;
@@ -8,6 +9,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, signOut } = useAuth(); // Use the auth hook
   
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard className="h-5 w-5" /> },
@@ -25,6 +27,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
     setIsMobileMenuOpen(false);
   };
   
+  const handleLogout = async () => {
+    await signOut();
+  };
+  
   return (
     <>
       {/* Desktop Sidebar */}
@@ -33,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
           <div className="flex-1 flex flex-col pt-8 pb-4 overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-6 mb-8">
               <BarChart2 className="h-8 w-8 text-accent-blue mr-3" />
-              <h1 className="gradient-text text-xl font-bold">Finanças</h1>
+              <h1 className="gradient-text text-xl font-bold">Planify</h1>
             </div>
             <nav className="flex-1 px-4 space-y-2">
               {navItems.map((item) => (
@@ -55,13 +61,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
           <div className="flex-shrink-0 flex p-4 mx-4 mb-6 rounded-xl bg-dark-card bg-opacity-50">
             <div className="flex items-center w-full">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple flex items-center justify-center text-white font-medium">
-                U
+                {user?.email ? user.email[0].toUpperCase() : 'U'}
               </div>
               <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-dark-text">Usuário</p>
-                <p className="text-xs text-dark-text-secondary">user@example.com</p>
+                <p className="text-sm font-medium text-dark-text">{user?.email?.split('@')[0] || 'Usuário'}</p>
+                <p className="text-xs text-dark-text-secondary">{user?.email || 'user@example.com'}</p>
               </div>
-              <button className="p-1.5 rounded-lg hover:bg-dark-bg hover:bg-opacity-50 text-dark-text-secondary hover:text-dark-text transition-colors">
+              <button 
+                onClick={handleLogout}
+                className="p-1.5 rounded-lg hover:bg-dark-bg hover:bg-opacity-50 text-dark-text-secondary hover:text-dark-text transition-colors"
+              >
                 <LogOut className="h-4 w-4" />
               </button>
             </div>
@@ -74,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center">
             <BarChart2 className="h-6 w-6 text-accent-blue mr-2" />
-            <h1 className="gradient-text text-lg font-bold">Finanças</h1>
+            <h1 className="gradient-text text-lg font-bold">Planify</h1>
           </div>
           <button
             onClick={toggleMobileMenu}
@@ -112,13 +121,16 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
           <div className="absolute bottom-8 left-4 right-4">
             <div className="flex items-center p-4 rounded-xl bg-dark-card bg-opacity-50">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple flex items-center justify-center text-white font-medium">
-                U
+                {user?.email ? user.email[0].toUpperCase() : 'U'}
               </div>
               <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-dark-text">Usuário</p>
-                <p className="text-xs text-dark-text-secondary">user@example.com</p>
+                <p className="text-sm font-medium text-dark-text">{user?.email?.split('@')[0] || 'Usuário'}</p>
+                <p className="text-xs text-dark-text-secondary">{user?.email || 'user@example.com'}</p>
               </div>
-              <button className="p-1.5 rounded-lg hover:bg-dark-bg hover:bg-opacity-50 text-dark-text-secondary hover:text-dark-text transition-colors">
+              <button 
+                onClick={handleLogout}
+                className="p-1.5 rounded-lg hover:bg-dark-bg hover:bg-opacity-50 text-dark-text-secondary hover:text-dark-text transition-colors"
+              >
                 <LogOut className="h-4 w-4" />
               </button>
             </div>

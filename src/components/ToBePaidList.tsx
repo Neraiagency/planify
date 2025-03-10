@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useFinance } from '../context/FinanceContext';
 import { formatCurrency } from '../utils/calculations';
-import { Edit2, Trash2, Plus, Check, Calendar } from 'lucide-react';
+import { Edit2, Trash2, Plus, Check, Calendar, PlusCircle } from 'lucide-react';
 import ToBePaidForm from './ToBePaidForm';
 
 const ToBePaidList: React.FC = () => {
@@ -13,6 +13,37 @@ const ToBePaidList: React.FC = () => {
     amount: number;
     status: 'paid' | 'pending' | 'scheduled';
   } | undefined>(undefined);
+  
+  // Se não houver meses disponíveis, exibe uma mensagem para começar a adicionar dados
+  if (monthsData.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-dark-bg px-4">
+        <div className="text-center max-w-md">
+          <div className="bg-accent-green bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
+            <PlusCircle className="h-8 w-8 text-accent-green" />
+          </div>
+          <h2 className="text-xl font-semibold mb-3 text-dark-text">Adicione seu primeiro item a pagar</h2>
+          <p className="text-dark-text-secondary mb-6">
+            Você ainda não registrou nenhum item a pagar. Clique no botão abaixo para adicionar seu primeiro item.
+          </p>
+          <button 
+            onClick={() => setShowForm(true)}
+            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-green hover:text-white hover:bg-accent-green transition-all duration-200"
+          >
+            <Plus className="h-4 w-4 mr-2 inline" />
+            Adicionar Item a Pagar
+          </button>
+        </div>
+        
+        {showForm && (
+          <ToBePaidForm
+            onClose={() => setShowForm(false)}
+            editItem={editingItem}
+          />
+        )}
+      </div>
+    );
+  }
   
   const currentMonthData = monthsData[currentMonthIndex];
   
@@ -135,7 +166,13 @@ const ToBePaidList: React.FC = () => {
               ) : (
                 <tr>
                   <td colSpan={4} className="px-6 py-10 text-center text-sm text-dark-text-secondary">
-                    Nenhum item a pagar encontrado
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="bg-dark-card bg-opacity-30 rounded-full p-3 mb-3">
+                        <Plus className="h-5 w-5 text-dark-text-secondary" />
+                      </div>
+                      <p className="mb-2">Nenhum item a pagar encontrado</p>
+                      <p className="text-xs">Clique em "Novo Item" para adicionar</p>
+                    </div>
                   </td>
                 </tr>
               )}

@@ -20,7 +20,7 @@ export interface Transaction {
 export interface CreditCard {
   id: string;
   name: PaymentMethod;
-  limit: number;
+  credit_limit: number; // Alterado de 'limit' para 'credit_limit'
   used: number;
   dueDate: number; // Day of month
   closingDate: number; // Day of month

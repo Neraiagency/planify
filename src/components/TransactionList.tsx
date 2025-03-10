@@ -3,7 +3,7 @@ import { useFinance } from '../context/FinanceContext';
 import { formatCurrency, getMonthName } from '../utils/calculations';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { Edit2, Trash2, Plus, CreditCard, Calendar, Filter } from 'lucide-react';
+import { Edit2, Trash2, Plus, CreditCard, Calendar, Filter, PlusCircle } from 'lucide-react';
 import TransactionForm from './TransactionForm';
 import { Transaction } from '../types';
 
@@ -12,8 +12,6 @@ const TransactionList: React.FC = () => {
   const [showTransactionForm, setShowTransactionForm] = useState<boolean>(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | undefined>(undefined);
   const [filter, setFilter] = useState<string>('all');
-  
-  const currentMonthData = monthsData[currentMonthIndex];
   
   const handleEditTransaction = (transaction: Transaction) => {
     setEditingTransaction(transaction);
@@ -35,6 +33,32 @@ const TransactionList: React.FC = () => {
     setShowTransactionForm(false);
     setEditingTransaction(undefined);
   };
+  
+  // Se não houver meses disponíveis, exibe uma mensagem para começar a adicionar dados
+  if (monthsData.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen bg-dark-bg px-4">
+        <div className="text-center max-w-md">
+          <div className="bg-accent-blue bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
+            <PlusCircle className="h-8 w-8 text-accent-blue" />
+          </div>
+          <h2 className="text-xl font-semibold mb-3 text-dark-text">Adicione sua primeira transação</h2>
+          <p className="text-dark-text-secondary mb-6">
+            Você ainda não registrou nenhuma transação. Clique no botão abaixo para adicionar sua primeira receita ou despesa.
+          </p>
+          <button 
+            onClick={handleAddTransaction}
+            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+          >
+            <Plus className="h-4 w-4 mr-2 inline" />
+            Nova Transação
+          </button>
+        </div>
+      </div>
+    );
+  }
+  
+  const currentMonthData = monthsData[currentMonthIndex];
   
   const filteredTransactions = currentMonthData.transactions.filter(transaction => {
     if (filter === 'all') return true;
@@ -180,7 +204,13 @@ const TransactionList: React.FC = () => {
               ) : (
                 <tr>
                   <td colSpan={7} className="px-6 py-10 text-center text-sm text-dark-text-secondary">
-                    Nenhuma transação encontrada
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="bg-dark-card bg-opacity-30 rounded-full p-3 mb-3">
+                        <Plus className="h-5 w-5 text-dark-text-secondary" />
+                      </div>
+                      <p className="mb-2">Nenhuma transação encontrada</p>
+                      <p className="text-xs">Clique em "Nova Transação" para adicionar</p>
+                    </div>
                   </td>
                 </tr>
               )}

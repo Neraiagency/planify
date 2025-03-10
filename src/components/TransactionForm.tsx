@@ -184,10 +184,10 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onClose, editTransact
                   <option value="Nubank">Nubank</option>
                   <option value="Inter">Inter</option>
                   <option value="C6 Bank">C6 Bank</option>
-                  <option value="PAN">PAN</option>
+                  <option value="Credit">Credito</option>
                   <option value="Debit">Débito</option>
                   <option value="Cash">Dinheiro</option>
-                  <option value="Other">Outro</option>
+                  <option value="Pix">Pix</option>
                 </select>
               </div>
             </div>
@@ -277,6 +277,6 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onClose, editTransact
       </div>
     </div>
   );
-}
+};
 
 export default TransactionForm;
