@@ -3,16 +3,17 @@
 @tailwind utilities;
 
 :root {
-  --background: #0f172a;
-  --card-bg: rgba(30, 41, 59, 0.7);
-  --card-border: rgba(71, 85, 105, 0.2);
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --accent-blue: #3b82f6;
-  --accent-purple: #8b5cf6;
+  --background: #000000;
+  --card-bg: rgba(17, 17, 17, 0.7);
+  --card-border: rgba(51, 51, 51, 0.2);
+  --text-primary: #f8f8f8;
+  --text-secondary: #a0a0a0;
+  --accent-orange: #ff7b00;
+  --accent-orange-light: #ff9a44;
+  --accent-orange-dark: #cc6200;
   --accent-green: #10b981;
   --accent-red: #ef4444;
-  --accent-yellow: #f59e0b;
+  --accent-yellow: #ff7b00;
 }
 
 body {
@@ -29,31 +30,31 @@ body {
 }
 
 .glass-navbar {
-  background: rgba(15, 23, 42, 0.8);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(12px);
   border-right: 1px solid var(--card-border);
 }
 
 .glass-input {
-  background: rgba(30, 41, 59, 0.4);
+  background: rgba(17, 17, 17, 0.4);
   border: 1px solid var(--card-border);
 }
 
 .glass-input:focus {
-  background: rgba(30, 41, 59, 0.6);
-  border-color: var(--accent-blue);
+  background: rgba(17, 17, 17, 0.6);
+  border-color: var(--accent-orange);
 }
 
 .glass-button {
-  background: rgba(59, 130, 246, 0.2);
+  background: rgba(255, 123, 0, 0.2);
   backdrop-filter: blur(4px);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  border: 1px solid rgba(255, 123, 0, 0.3);
   transition: all 0.2s ease;
 }
 
 .glass-button:hover {
-  background: rgba(59, 130, 246, 0.3);
-  border-color: rgba(59, 130, 246, 0.5);
+  background: rgba(255, 123, 0, 0.3);
+  border-color: rgba(255, 123, 0, 0.5);
 }
 
 .glass-button-danger {
@@ -79,14 +80,14 @@ body {
 }
 
 .gradient-text {
-  background: linear-gradient(to right, #3b82f6, #8b5cf6);
+  background: linear-gradient(to right, #ff7b00, #ff9a44);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .gradient-card {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
-  border: 1px solid rgba(139, 92, 246, 0.2);
+  background: linear-gradient(135deg, rgba(255, 123, 0, 0.2), rgba(255, 154, 68, 0.2));
+  border: 1px solid rgba(255, 123, 0, 0.2);
 }
 
 /* Animações */
@@ -106,14 +107,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(30, 41, 59, 0.2);
+  background: rgba(17, 17, 17, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(71, 85, 105, 0.5);
+  background: rgba(51, 51, 51, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(71, 85, 105, 0.7);
+  background: rgba(51, 51, 51, 0.7);
 }

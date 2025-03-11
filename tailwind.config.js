@@ -5,20 +5,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        'dark-bg': '#0f172a',
-        'dark-card': '#1e293b',
-        'dark-border': '#334155',
-        'dark-text': '#f8fafc',
-        'dark-text-secondary': '#94a3b8',
-        'accent-blue': '#3b82f6',
-        'accent-purple': '#8b5cf6',
-        'accent-green': '#10b981',
-        'accent-red': '#ef4444',
-        'accent-yellow': '#f59e0b',
+        'dark-bg': '#000000',
+        'dark-card': '#111111',
+        'dark-border': '#333333',
+        'dark-text': '#f8f8f8',
+        'dark-text-secondary': '#a0a0a0',
+        'accent-blue': '#ff7b00',      // Substituído por laranja
+        'accent-purple': '#ff9a44',    // Substituído por laranja mais claro
+        'accent-green': '#10b981',     // Mantido para receitas
+        'accent-red': '#ef4444',       // Mantido para despesas
+        'accent-yellow': '#ff7b00',    // Substituído por laranja
       },
       boxShadow: {
-        'glass': '0 4px 20px 0 rgba(0, 0, 0, 0.1)',
-        'glass-hover': '0 8px 25px 0 rgba(0, 0, 0, 0.15)',
+        'glass': '0 4px 20px 0 rgba(0, 0, 0, 0.3)',
+        'glass-hover': '0 8px 25px 0 rgba(0, 0, 0, 0.4)',
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',

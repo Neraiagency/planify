@@ -21,8 +21,8 @@ const Dashboard: React.FC = () => {
     return (
       <div className="flex flex-col items-center justify-center h-screen bg-dark-bg px-4">
         <div className="text-center max-w-md">
-          <div className="bg-accent-blue bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
-            <PlusCircle className="h-8 w-8 text-accent-blue" />
+          <div className="bg-accent-orange bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
+            <PlusCircle className="h-8 w-8 text-accent-orange" />
           </div>
           <h2 className="text-xl font-semibold mb-3 text-dark-text">Comece a adicionar suas finanças</h2>
           <p className="text-dark-text-secondary mb-6">
@@ -31,7 +31,7 @@ const Dashboard: React.FC = () => {
           <div className="flex justify-center">
             <button 
               onClick={() => setShowTransactionForm(true)}
-              className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+              className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
             >
               Adicionar Transação
             </button>
@@ -87,28 +87,28 @@ const Dashboard: React.FC = () => {
       {
         data: categorySummary.map(category => category.amount),
         backgroundColor: [
-          'rgba(59, 130, 246, 0.7)',
-          'rgba(139, 92, 246, 0.7)',
-          'rgba(245, 158, 11, 0.7)',
-          'rgba(16, 185, 129, 0.7)',
-          'rgba(239, 68, 68, 0.7)',
-          'rgba(236, 72, 153, 0.7)',
-          'rgba(99, 102, 241, 0.7)',
-          'rgba(14, 165, 233, 0.7)',
-          'rgba(20, 184, 166, 0.7)',
-          'rgba(168, 85, 247, 0.7)',
+          'rgba(255, 123, 0, 0.7)',    // accent-orange base
+          'rgba(255, 154, 68, 0.7)',    // accent-orange-light
+          'rgba(204, 98, 0, 0.7)',      // accent-orange-dark
+          'rgba(255, 183, 77, 0.7)',    // Outro tom de laranja
+          'rgba(239, 68, 68, 0.7)',     // Manter accent-red para despesas
+          'rgba(255, 99, 71, 0.7)',     // Variação de vermelho/laranja
+          'rgba(255, 140, 0, 0.7)',     // Outra variação de laranja
+          'rgba(255, 165, 0, 0.7)',     // Outra variação de laranja
+          'rgba(16, 185, 129, 0.7)',    // Manter accent-green para receitas
+          'rgba(255, 69, 0, 0.7)',      // Mais uma variação de laranja
         ],
         borderColor: [
-          'rgba(59, 130, 246, 0.9)',
-          'rgba(139, 92, 246, 0.9)',
-          'rgba(245, 158, 11, 0.9)',
-          'rgba(16, 185, 129, 0.9)',
+          'rgba(255, 123, 0, 0.9)',
+          'rgba(255, 154, 68, 0.9)',
+          'rgba(204, 98, 0, 0.9)',
+          'rgba(255, 183, 77, 0.9)',
           'rgba(239, 68, 68, 0.9)',
-          'rgba(236, 72, 153, 0.9)',
-          'rgba(99, 102, 241, 0.9)',
-          'rgba(14, 165, 233, 0.9)',
-          'rgba(20, 184, 166, 0.9)',
-          'rgba(168, 85, 247, 0.9)',
+          'rgba(255, 99, 71, 0.9)',
+          'rgba(255, 140, 0, 0.9)',
+          'rgba(255, 165, 0, 0.9)',
+          'rgba(16, 185, 129, 0.9)',
+          'rgba(255, 69, 0, 0.9)',
         ],
         borderWidth: 1,
       },
@@ -199,14 +199,14 @@ const Dashboard: React.FC = () => {
           <h1 className="text-2xl font-bold">Dashboard</h1>
           <div className="flex items-center space-x-4">
             <div className="flex items-center bg-dark-card bg-opacity-50 rounded-lg px-3 py-1.5">
-              <Calendar className="h-4 w-4 text-accent-blue mr-2" />
+              <Calendar className="h-4 w-4 text-accent-orange mr-2" />
               <span className="text-sm text-dark-text-secondary">
                 {getMonthName(currentMonthData.month)} {currentMonthData.year}
               </span>
             </div>
             <button
               onClick={() => setShowTransactionForm(true)}
-              className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+              className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
             >
               <PlusCircle className="h-4 w-4 mr-2" />
               Nova Transação
@@ -326,7 +326,7 @@ const Dashboard: React.FC = () => {
                         <div className="flex items-center">
                           <div className="w-16 bg-dark-card rounded-full h-2 mr-2">
                             <div
-                              className="h-2 rounded-full bg-accent-blue"
+                              className="h-2 rounded-full bg-accent-orange"
                               style={{ width: `${category.percentage}%` }}
                             ></div>
                           </div>

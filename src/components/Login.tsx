@@ -42,10 +42,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-dark-bg">
+    <div className="flex items-center justify-center min-h-screen bg-black">
       <div className="glass-card rounded-xl p-8 w-full max-w-md">
         <div className="flex items-center justify-center mb-8">
-          <BarChart2 className="h-8 w-8 text-accent-blue mr-3" />
+          <BarChart2 className="h-8 w-8 text-accent-orange mr-3" />
           <h1 className="gradient-text text-xl font-bold">Planify</h1>
         </div>
 
@@ -89,7 +89,7 @@ const Login: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="glass-button w-full px-4 py-3 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+            className="glass-button w-full px-4 py-3 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
           >
             {loading 
               ? 'Processando...' 
@@ -102,7 +102,7 @@ const Login: React.FC = () => {
         <div className="mt-4 text-center">
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-sm text-dark-text-secondary hover:text-accent-blue transition-colors"
+            className="text-sm text-dark-text-secondary hover:text-accent-orange transition-colors"
           >
             {isSignUp 
               ? 'Já tem uma conta? Entrar' 

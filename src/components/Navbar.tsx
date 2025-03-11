@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
         <div className="flex-1 flex flex-col min-h-0 glass-navbar">
           <div className="flex-1 flex flex-col pt-8 pb-4 overflow-y-auto">
             <div className="flex items-center flex-shrink-0 px-6 mb-8">
-              <BarChart2 className="h-8 w-8 text-accent-blue mr-3" />
+              <BarChart2 className="h-8 w-8 text-accent-orange mr-3" />
               <h1 className="gradient-text text-xl font-bold">Planify</h1>
             </div>
             <nav className="flex-1 px-4 space-y-2">
@@ -48,7 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
                   onClick={() => handleNavItemClick(item.id)}
                   className={`${
                     currentPage === item.id
-                      ? 'bg-accent-blue bg-opacity-20 text-accent-blue'
+                      ? 'bg-accent-orange bg-opacity-20 text-accent-orange'
                       : 'text-dark-text-secondary hover:bg-dark-card hover:bg-opacity-40 hover:text-dark-text'
                   } group flex items-center px-4 py-3 text-sm font-medium rounded-xl w-full transition-all duration-200 ease-in-out`}
                 >
@@ -60,7 +60,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
           </div>
           <div className="flex-shrink-0 flex p-4 mx-4 mb-6 rounded-xl bg-dark-card bg-opacity-50">
             <div className="flex items-center w-full">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple flex items-center justify-center text-white font-medium">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-orange to-accent-orange-light flex items-center justify-center text-white font-medium">
                 {user?.email ? user.email[0].toUpperCase() : 'U'}
               </div>
               <div className="ml-3 flex-1">
@@ -82,7 +82,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
       <div className="md:hidden glass-navbar fixed top-0 left-0 right-0 z-10 p-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <BarChart2 className="h-6 w-6 text-accent-blue mr-2" />
+            <BarChart2 className="h-6 w-6 text-accent-orange mr-2" />
             <h1 className="gradient-text text-lg font-bold">Planify</h1>
           </div>
           <button
@@ -108,7 +108,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
                 onClick={() => handleNavItemClick(item.id)}
                 className={`${
                   currentPage === item.id
-                    ? 'bg-accent-blue bg-opacity-20 text-accent-blue'
+                    ? 'bg-accent-orange bg-opacity-20 text-accent-orange'
                     : 'text-dark-text-secondary hover:bg-dark-card hover:bg-opacity-40 hover:text-dark-text'
                 } flex items-center px-4 py-3 rounded-xl w-full text-left transition-all duration-200 ease-in-out`}
               >
@@ -120,7 +120,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
           
           <div className="absolute bottom-8 left-4 right-4">
             <div className="flex items-center p-4 rounded-xl bg-dark-card bg-opacity-50">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-blue to-accent-purple flex items-center justify-center text-white font-medium">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-orange to-accent-orange-light flex items-center justify-center text-white font-medium">
                 {user?.email ? user.email[0].toUpperCase() : 'U'}
               </div>
               <div className="ml-3 flex-1">

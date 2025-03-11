@@ -37,7 +37,7 @@ const ToBePaidForm: React.FC<ToBePaidFormProps> = ({ onClose, editItem }) => {
   };
   
   return (
-    <div className="fixed inset-0 bg-dark-bg bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
+    <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in">
       <div className="glass-card rounded-xl w-full max-w-md relative">
         <button 
           onClick={onClose}
@@ -67,7 +67,7 @@ const ToBePaidForm: React.FC<ToBePaidFormProps> = ({ onClose, editItem }) => {
             <div className="mb-5">
               <label className="block text-sm font-medium text-dark-text-secondary mb-2">Valor</label>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                 <input
                   type="number"
                   step="0.01"
@@ -83,7 +83,7 @@ const ToBePaidForm: React.FC<ToBePaidFormProps> = ({ onClose, editItem }) => {
             <div className="mb-5">
               <label className="block text-sm font-medium text-dark-text-secondary mb-2">Status</label>
               <div className="relative">
-                <CheckCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                <CheckCircle className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as TransactionStatus)}
@@ -107,7 +107,7 @@ const ToBePaidForm: React.FC<ToBePaidFormProps> = ({ onClose, editItem }) => {
               </button>
               <button
                 type="submit"
-                className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+                className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
               >
                 {editItem ? 'Atualizar' : 'Adicionar'}
               </button>

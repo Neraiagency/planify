@@ -74,10 +74,10 @@ const CreditCardList: React.FC = () => {
   // Se não houver cartões, exibe mensagem para adicionar o primeiro
   if (creditCards.length === 0 && !isAddingCard) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-dark-bg px-4">
+      <div className="flex flex-col items-center justify-center h-screen bg-black px-4">
         <div className="text-center max-w-md">
-          <div className="bg-accent-purple bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
-            <PlusCircle className="h-8 w-8 text-accent-purple" />
+          <div className="bg-accent-orange bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
+            <PlusCircle className="h-8 w-8 text-accent-orange" />
           </div>
           <h2 className="text-xl font-semibold mb-3 text-dark-text">Adicione seu primeiro cartão</h2>
           <p className="text-dark-text-secondary mb-6">
@@ -85,7 +85,7 @@ const CreditCardList: React.FC = () => {
           </p>
           <button 
             onClick={handleAddClick}
-            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-purple hover:text-white hover:bg-accent-purple transition-all duration-200"
+            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
           >
             <CreditCardIcon className="h-4 w-4 mr-2 inline" />
             Adicionar Cartão
@@ -109,7 +109,7 @@ const CreditCardList: React.FC = () => {
                 type="text"
                 name="name"
                 required
-                className="glass-input w-full px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                className="glass-input w-full px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
               />
             </div>
             
@@ -117,26 +117,26 @@ const CreditCardList: React.FC = () => {
               <div>
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">Limite</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                   <input
                     type="number"
                     step="0.01"
                     name="credit_limit"
                     required
-                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">Utilizado</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                   <input
                     type="number"
                     step="0.01"
                     name="used"
                     required
-                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>
               </div>
@@ -146,28 +146,28 @@ const CreditCardList: React.FC = () => {
               <div>
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">Dia de Vencimento</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                   <input
                     type="number"
                     min="1"
                     max="31"
                     name="dueDate"
                     required
-                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">Dia de Fechamento</label>
                 <div className="relative">
-                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                  <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                   <input
                     type="number"
                     min="1"
                     max="31"
                     name="closingDate"
                     required
-                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>
               </div>
@@ -183,7 +183,7 @@ const CreditCardList: React.FC = () => {
               </button>
               <button
                 type="submit"
-                className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-purple hover:text-white hover:bg-accent-purple transition-all duration-200"
+                className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
               >
                 Adicionar
               </button>
@@ -200,7 +200,7 @@ const CreditCardList: React.FC = () => {
         <h1 className="text-2xl font-bold">Cartões de Crédito</h1>
         <button
           onClick={handleAddClick}
-          className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-purple hover:text-white hover:bg-accent-purple transition-all duration-200"
+          className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
         >
           <PlusCircle className="h-4 w-4 mr-2" />
           Novo Cartão
@@ -210,7 +210,7 @@ const CreditCardList: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {creditCards.map((card) => (
           <div key={card.id} className="glass-card rounded-xl overflow-hidden animate-fade-in">
-            <div className="bg-gradient-to-r from-accent-blue to-accent-purple p-5 text-white">
+            <div className="bg-gradient-to-r from-accent-orange to-accent-orange-light p-5 text-white">
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-semibold">{card.name}</h3>
                 <CreditCardIcon className="h-6 w-6" />
@@ -224,26 +224,26 @@ const CreditCardList: React.FC = () => {
                   <div>
                     <label className="block text-sm font-medium text-dark-text-secondary mb-2">Limite</label>
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                      <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                       <input
                         type="number"
                         step="0.01"
                         value={editingCard.credit_limit}
                         onChange={(e) => handleInputChange('credit_limit', e.target.value)}
-                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                       />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-dark-text-secondary mb-2">Utilizado</label>
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                      <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                       <input
                         type="number"
                         step="0.01"
                         value={editingCard.used}
                         onChange={(e) => handleInputChange('used', e.target.value)}
-                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                       />
                     </div>
                   </div>
@@ -253,28 +253,28 @@ const CreditCardList: React.FC = () => {
                   <div>
                     <label className="block text-sm font-medium text-dark-text-secondary mb-2">Dia de Vencimento</label>
                     <div className="relative">
-                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                       <input
                         type="number"
                         min="1"
                         max="31"
                         value={editingCard.dueDate}
                         onChange={(e) => handleInputChange('dueDate', e.target.value)}
-                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                       />
                     </div>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-dark-text-secondary mb-2">Dia de Fechamento</label>
                     <div className="relative">
-                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue" size={16} />
+                      <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
                       <input
                         type="number"
                         min="1"
                         max="31"
                         value={editingCard.closingDate}
                         onChange={(e) => handleInputChange('closingDate', e.target.value)}
-                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                        className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                       />
                     </div>
                   </div>
@@ -289,7 +289,7 @@ const CreditCardList: React.FC = () => {
                   </button>
                   <button
                     onClick={handleSaveCard}
-                    className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+                    className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
                   >
                     Salvar
                   </button>
@@ -307,7 +307,7 @@ const CreditCardList: React.FC = () => {
                   <div className="w-full bg-dark-card bg-opacity-50 rounded-full h-2.5 overflow-hidden">
                     <div
                       className={`h-2.5 rounded-full ${
-                        (card.used / card.credit_limit) > 0.8 ? 'bg-accent-red' : 'bg-accent-blue'
+                        (card.used / card.credit_limit) > 0.8 ? 'bg-accent-red' : 'bg-accent-orange'
                       }`}
                       style={{ width: `${(card.used / card.credit_limit) * 100}%` }}
                     ></div>
@@ -318,14 +318,14 @@ const CreditCardList: React.FC = () => {
                   <div className="glass-card bg-opacity-30 p-3 rounded-lg">
                     <p className="text-sm text-dark-text-secondary mb-1">Vencimento</p>
                     <div className="flex items-center">
-                      <Calendar className="h-4 w-4 text-accent-blue mr-2" />
+                      <Calendar className="h-4 w-4 text-accent-orange mr-2" />
                       <p className="font-medium text-dark-text">Dia {card.dueDate}</p>
                     </div>
                   </div>
                   <div className="glass-card bg-opacity-30 p-3 rounded-lg">
                     <p className="text-sm text-dark-text-secondary mb-1">Fechamento</p>
                     <div className="flex items-center">
-                      <Calendar className="h-4 w-4 text-accent-purple mr-2" />
+                      <Calendar className="h-4 w-4 text-accent-orange mr-2" />
                       <p className="font-medium text-dark-text">Dia {card.closingDate}</p>
                     </div>
                   </div>
@@ -342,7 +342,7 @@ const CreditCardList: React.FC = () => {
                 
                 <button
                   onClick={() => handleEditCard(card)}
-                  className="glass-button w-full px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200 flex items-center justify-center"
+                  className="glass-button w-full px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200 flex items-center justify-center"
                 >
                   <Edit2 className="h-4 w-4 mr-2" />
                   Editar Cartão

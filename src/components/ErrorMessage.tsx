@@ -16,7 +16,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({ message, onRetry }) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-dark-bg">
+    <div className="flex items-center justify-center h-screen bg-black">
       <div className="glass-card rounded-xl p-8 max-w-md text-center">
         <AlertTriangle className="mx-auto h-12 w-12 text-accent-red mb-4" />
         <h2 className="text-xl font-semibold mb-2 text-dark-text">Ocorreu um erro</h2>

@@ -41,11 +41,11 @@ const AppContent: React.FC = () => {
   };
   
   return (
-    <div className="flex h-screen bg-dark-bg text-dark-text">
+    <div className="flex h-screen bg-black text-dark-text">
       <Navbar currentPage={currentPage} onChangePage={setCurrentPage} />
       
       <div className="flex-1 md:ml-64 flex flex-col">
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto bg-black">
           {renderPage()}
         </main>
       </div>

@@ -17,10 +17,10 @@ const ToBePaidList: React.FC = () => {
   // Se não houver meses disponíveis, exibe uma mensagem para começar a adicionar dados
   if (monthsData.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-dark-bg px-4">
+      <div className="flex flex-col items-center justify-center h-screen bg-black px-4">
         <div className="text-center max-w-md">
-          <div className="bg-accent-green bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
-            <PlusCircle className="h-8 w-8 text-accent-green" />
+          <div className="bg-accent-orange bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
+            <PlusCircle className="h-8 w-8 text-accent-orange" />
           </div>
           <h2 className="text-xl font-semibold mb-3 text-dark-text">Adicione seu primeiro item a pagar</h2>
           <p className="text-dark-text-secondary mb-6">
@@ -28,7 +28,7 @@ const ToBePaidList: React.FC = () => {
           </p>
           <button 
             onClick={() => setShowForm(true)}
-            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-green hover:text-white hover:bg-accent-green transition-all duration-200"
+            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
           >
             <Plus className="h-4 w-4 mr-2 inline" />
             Adicionar Item a Pagar
@@ -83,14 +83,14 @@ const ToBePaidList: React.FC = () => {
         <h1 className="text-2xl font-bold">A Pagar</h1>
         <div className="flex items-center space-x-4">
           <div className="flex items-center bg-dark-card bg-opacity-50 rounded-lg px-3 py-1.5">
-            <Calendar className="h-4 w-4 text-accent-blue mr-2" />
+            <Calendar className="h-4 w-4 text-accent-orange mr-2" />
             <span className="text-sm text-dark-text-secondary">
               {new Date(currentMonthData.year, currentMonthData.month).toLocaleString('pt-BR', { month: 'long', year: 'numeric' })}
             </span>
           </div>
           <button
             onClick={handleAddItem}
-            className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+            className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
           >
             <Plus className="h-4 w-4 mr-2" />
             Novo Item
@@ -152,7 +152,7 @@ const ToBePaidList: React.FC = () => {
                         onClick={() => handleEditItem(item)}
                         className="glass-button p-1.5 rounded-lg mr-2 transition-colors"
                       >
-                        <Edit2 className="h-4 w-4 text-accent-blue" />
+                        <Edit2 className="h-4 w-4 text-accent-orange" />
                       </button>
                       <button
                         onClick={() => handleDeleteItem(item.id)}
