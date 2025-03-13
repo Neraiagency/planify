@@ -195,15 +195,15 @@ const CreditCardList: React.FC = () => {
   }
   
   return (
-    <div className="p-6 md:p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold">Cartões de Crédito</h1>
+    <div className="pt-24 px-6 pb-6 md:pt-24 md:px-8 md:pb-8">
+      <div className="flex justify-between items-center mb-6 md:mb-8">
+        <h1 className="text-xl md:text-2xl font-bold">Cartões de Crédito</h1>
         <button
           onClick={handleAddClick}
-          className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
+          className="glass-button flex items-center justify-center p-2 md:px-4 md:py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
         >
           <PlusCircle className="h-4 w-4 mr-2" />
-          Novo Cartão
+          <span className=" md:inline ml-2">Novo Cartão</span>
         </button>
       </div>
       

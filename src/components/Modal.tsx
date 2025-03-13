@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({
           <X className="h-5 w-5" />
         </button>
         
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <div className="flex items-center mb-4">
             {icon && <div className="mr-3">{icon}</div>}
             <h2 className="text-xl font-semibold gradient-text">{title}</h2>

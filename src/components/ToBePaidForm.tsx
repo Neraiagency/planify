@@ -46,13 +46,13 @@ const ToBePaidForm: React.FC<ToBePaidFormProps> = ({ onClose, editItem }) => {
           <X className="h-5 w-5" />
         </button>
         
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           <h2 className="text-xl font-semibold mb-6 gradient-text">
             {editItem ? 'Editar Item a Pagar' : 'Novo Item a Pagar'}
           </h2>
           
           <form onSubmit={handleSubmit}>
-            <div className="mb-5">
+          <div className="mb-4 md:mb-5">
               <label className="block text-sm font-medium text-dark-text-secondary mb-2">Descrição</label>
               <input
                 type="text"

@@ -3,7 +3,7 @@ import { useFinance } from '../context/FinanceContext';
 import { formatCurrency, getMonthName } from '../utils/calculations';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { Edit2, Trash2, Plus, CreditCard, Calendar, Filter, PlusCircle } from 'lucide-react';
+import { Edit2, Trash2, Plus, CreditCard, Calendar, Filter, PlusCircle, ChevronRight } from 'lucide-react';
 import TransactionForm from './TransactionForm';
 import { Transaction } from '../types';
 
@@ -12,6 +12,7 @@ const TransactionList: React.FC = () => {
   const [showTransactionForm, setShowTransactionForm] = useState<boolean>(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | undefined>(undefined);
   const [filter, setFilter] = useState<string>('all');
+  const [expandedTransaction, setExpandedTransaction] = useState<string | null>(null);
   
   const handleEditTransaction = (transaction: Transaction) => {
     setEditingTransaction(transaction);
@@ -33,11 +34,15 @@ const TransactionList: React.FC = () => {
     setShowTransactionForm(false);
     setEditingTransaction(undefined);
   };
+
+  const toggleExpandTransaction = (id: string) => {
+    setExpandedTransaction(expandedTransaction === id ? null : id);
+  };
   
   // Se não houver meses disponíveis, exibe uma mensagem para começar a adicionar dados
   if (monthsData.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen bg-dark-bg px-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-dark-bg px-4">
         <div className="text-center max-w-md">
           <div className="bg-accent-blue bg-opacity-10 rounded-full p-4 mb-6 mx-auto w-16 h-16 flex items-center justify-center">
             <PlusCircle className="h-8 w-8 text-accent-blue" />
@@ -48,7 +53,7 @@ const TransactionList: React.FC = () => {
           </p>
           <button 
             onClick={handleAddTransaction}
-            className="glass-button px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+            className="glass-button w-full sm:w-auto px-4 py-3 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
           >
             <Plus className="h-4 w-4 mr-2 inline" />
             Nova Transação
@@ -76,12 +81,12 @@ const TransactionList: React.FC = () => {
   
   return (
     <>
-      <div className="p-6 md:p-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-          <h1 className="text-2xl font-bold mb-4 md:mb-0">Transações</h1>
+      <div className="p-3 sm:p-5 md:p-6 lg:p-8">
+        <div className="flex flex-col mb-6">
+          <h1 className="text-xl sm:text-2xl font-bold mb-4 py-1">Transações</h1>
           
-          <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full md:w-auto">
-            <div className="relative">
+          <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:space-x-3 w-full">
+            <div className="relative flex-grow sm:flex-grow-0">
               <select
                 value={`${currentMonthData.year}-${currentMonthData.month}`}
                 onChange={(e) => {
@@ -91,7 +96,7 @@ const TransactionList: React.FC = () => {
                     setCurrentMonthIndex(index);
                   }
                 }}
-                className="glass-input appearance-none w-full md:w-auto pl-10 pr-10 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                className="glass-input appearance-none w-full pl-10 pr-10 py-2.5 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
               >
                 {monthsData.map((data, index) => (
                   <option key={index} value={`${data.year}-${data.month}`}>
@@ -102,11 +107,11 @@ const TransactionList: React.FC = () => {
               <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-blue pointer-events-none" size={16} />
             </div>
             
-            <div className="relative">
+            <div className="relative flex-grow sm:flex-grow-0">
               <select
                 value={filter}
                 onChange={(e) => setFilter(e.target.value)}
-                className="glass-input appearance-none w-full md:w-auto pl-10 pr-10 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
+                className="glass-input appearance-none w-full pl-10 pr-10 py-2.5 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
               >
                 <option value="all">Todas</option>
                 <option value="income">Receitas</option>
@@ -117,7 +122,7 @@ const TransactionList: React.FC = () => {
             
             <button
               onClick={handleAddTransaction}
-              className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200"
+              className="glass-button flex items-center justify-center px-5 py-3 rounded-lg text-sm font-medium text-accent-blue hover:text-white hover:bg-accent-blue transition-all duration-200 w-full sm:w-auto"
             >
               <Plus className="h-4 w-4 mr-2" />
               Nova Transação
@@ -125,7 +130,8 @@ const TransactionList: React.FC = () => {
           </div>
         </div>
         
-        <div className="glass-card rounded-xl overflow-hidden animate-fade-in">
+        {/* Versão Desktop - Tabela visível apenas em telas maiores */}
+        <div className="glass-card rounded-xl overflow-hidden animate-fade-in hidden md:block">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-dark-border">
               <thead>
@@ -226,9 +232,108 @@ const TransactionList: React.FC = () => {
             </table>
           </div>
         </div>
+        
+        {/* Versão Mobile - Lista de cards visível apenas em telas menores */}
+        <div className="md:hidden animate-fade-in">
+          {filteredTransactions.length > 0 ? (
+            <div className="grid grid-cols-1 gap-3">
+              {filteredTransactions.map((transaction) => (
+                <div 
+                  key={transaction.id} 
+                  className="glass-card rounded-xl p-4 overflow-hidden"
+                >
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="font-medium text-dark-text">{transaction.description}</h3>
+                      <p className="text-xs text-dark-text-secondary">
+                        {format(transaction.date, 'dd/MM/yyyy', { locale: ptBR })}
+                        {transaction.installments && (
+                          <span className="ml-2">
+                            ({transaction.installments.current}/{transaction.installments.total})
+                          </span>
+                        )}
+                      </p>
+                    </div>
+                    <div className={`font-medium ${
+                      transaction.type === 'income' ? 'text-accent-green' : 'text-accent-red'
+                    }`}>
+                      {transaction.type === 'income' ? '+' : '-'} {formatCurrency(transaction.amount)}
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      <span className={`px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        transaction.status === 'paid' ? 'bg-accent-green bg-opacity-10 text-accent-green' : 
+                        transaction.status === 'pending' ? 'bg-accent-yellow bg-opacity-10 text-accent-yellow' : 
+                        'bg-dark-card text-dark-text-secondary'
+                      }`}>
+                        {transaction.status === 'paid' ? 'Pago' : 
+                         transaction.status === 'pending' ? 'Pendente' : 
+                         'Agendado'}
+                      </span>
+                    </div>
+                    
+                    <button
+                      onClick={() => toggleExpandTransaction(transaction.id)}
+                      className="text-accent-blue p-1"
+                    >
+                      <ChevronRight className={`h-5 w-5 transition-transform duration-200 ${
+                        expandedTransaction === transaction.id ? 'transform rotate-90' : ''
+                      }`} />
+                    </button>
+                  </div>
+                  
+                  {expandedTransaction === transaction.id && (
+                    <div className="mt-3 pt-3 border-t border-dark-border">
+                      <div className="grid grid-cols-2 gap-2 mb-3">
+                        <div>
+                          <p className="text-xs text-dark-text-secondary">Categoria</p>
+                          <p className="text-sm">{transaction.category}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-dark-text-secondary">Método</p>
+                          <p className="text-sm flex items-center">
+                            <CreditCard className="h-3 w-3 mr-1 text-accent-blue" />
+                            {transaction.paymentMethod}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-end space-x-3">
+                        <button
+                          onClick={() => handleEditTransaction(transaction)}
+                          className="flex items-center justify-center p-2 rounded-full bg-accent-blue bg-opacity-10 text-accent-blue"
+                        >
+                          <Edit2 className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteTransaction(transaction.id)}
+                          className="flex items-center justify-center p-2 rounded-full bg-accent-red bg-opacity-10 text-accent-red"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="glass-card rounded-xl p-8 text-center">
+              <div className="flex flex-col items-center justify-center">
+                <div className="bg-dark-card bg-opacity-30 rounded-full p-3 mb-3">
+                  <Plus className="h-5 w-5 text-dark-text-secondary" />
+                </div>
+                <p className="mb-2">Nenhuma transação encontrada</p>
+                <p className="text-xs">Clique em "Nova Transação" para adicionar</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       
-      {/* Renderizar o formulário de transação fora do container principal para evitar problemas de posicionamento */}
+      {/* Formulário de transação */}
       {showTransactionForm && (
         <TransactionForm
           onClose={handleCloseForm}

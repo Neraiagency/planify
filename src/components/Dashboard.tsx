@@ -194,11 +194,11 @@ const Dashboard: React.FC = () => {
   
   return (
     <>
-      <div className="p-6 md:p-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center bg-dark-card bg-opacity-50 rounded-lg px-3 py-1.5">
+      <div className="p-4 sm:p-5 md:p-6 lg:p-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 px-1 sm:px-2"> 
+          <h1 className="text-2xl font-bold mb-4 sm:mb-0 py-1">Dashboard</h1>
+          <div className="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+            <div className="flex items-center bg-dark-card bg-opacity-50 rounded-lg px-4 py-2.5">
               <Calendar className="h-4 w-4 text-accent-orange mr-2" />
               <span className="text-sm text-dark-text-secondary">
                 {getMonthName(currentMonthData.month)} {currentMonthData.year}
@@ -206,7 +206,7 @@ const Dashboard: React.FC = () => {
             </div>
             <button
               onClick={() => setShowTransactionForm(true)}
-              className="glass-button flex items-center justify-center px-4 py-2 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200"
+              className="glass-button flex items-center justify-center px-5 py-3 rounded-lg text-sm font-medium text-accent-orange hover:text-white hover:bg-accent-orange transition-all duration-200 ml-auto"
             >
               <PlusCircle className="h-4 w-4 mr-2" />
               Nova Transação
@@ -215,8 +215,8 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="glass-card rounded-xl p-5 animate-fade-in" style={{animationDelay: '0ms'}}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 md:mb-8">
+         <div className="glass-card rounded-xl p-4 md:p-5 animate-fade-in" style={{animationDelay: '0ms'}}>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-dark-text-secondary mb-1">Receitas</p>
@@ -274,7 +274,7 @@ const Dashboard: React.FC = () => {
         </div>
         
         {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
           <div className="glass-card rounded-xl p-5 animate-fade-in" style={{animationDelay: '400ms'}}>
             <h2 className="text-lg font-semibold mb-4">Comparativo Mensal</h2>
             <Bar data={monthlyComparisonData} options={chartOptions} />

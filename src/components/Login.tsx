@@ -78,7 +78,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
-      <div className="glass-card rounded-xl p-8 w-full max-w-md">
+      <div className="glass-card rounded-xl p-5 sm:p-6 md:p-8 w-full max-w-md">
         <div className="flex items-center justify-center mb-8">
           <BarChart2 className="h-8 w-8 text-accent-orange mr-3" />
           <h1 className="gradient-text text-xl font-bold">Planify</h1>
@@ -95,7 +95,7 @@ const Login: React.FC = () => {
         )}
 
         <form onSubmit={handleAuth}>
-          <div className="mb-4">
+         <div className="mb-3 sm:mb-4">
             <label className="block text-sm font-medium text-dark-text-secondary mb-2">
               Email
             </label>

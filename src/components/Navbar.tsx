@@ -101,7 +101,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden fixed inset-0 z-20 pt-16 glass-navbar animate-fade-in">
-          <div className="px-4 pt-4 pb-6 space-y-2">
+          <div className="px-3 sm:px-4 pt-3 sm:pt-4 pb-5 sm:pb-6 space-y-2">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -118,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
             ))}
           </div>
           
-          <div className="absolute bottom-8 left-4 right-4">
+          <div className="absolute bottom-6 sm:bottom-8 left-3 sm:left-4 right-3 sm:right-4">
             <div className="flex items-center p-4 rounded-xl bg-dark-card bg-opacity-50">
               <div className="w-8 h-8 rounded-full bg-gradient-to-r from-accent-orange to-accent-orange-light flex items-center justify-center text-white font-medium">
                 {user?.email ? user.email[0].toUpperCase() : 'U'}
