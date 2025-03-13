@@ -65,7 +65,6 @@ export const addTransactionToSupabase = async (transaction: Omit<Transaction, 'i
     
     // Preparando o objeto para o formato que o Supabase espera
     const transactionData = {
-      date: transaction.date.toISOString(),
       amount: transaction.amount,
       description: transaction.description,
       category: transaction.category,

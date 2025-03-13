@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({ currentPage, onChangePage }) => {
                 {user?.email ? user.email[0].toUpperCase() : 'U'}
               </div>
               <div className="ml-3 flex-1">
-                <p className="text-sm font-medium text-dark-text">{user?.email?.split('@')[0] || 'Usuário'}</p>
+                <p className="text-sm font-medium text-dark-text">{user?.user_metadata?.nome?.split(' ')[0] || user?.email?.split('@')[0] || 'Usuário'}</p>
                 <p className="text-xs text-dark-text-secondary">{user?.email || 'user@example.com'}</p>
               </div>
               <button 

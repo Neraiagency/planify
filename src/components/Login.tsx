@@ -8,6 +8,7 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   const [nome, setNome] = useState('');
   const [rendaMensal, setRendaMensal] = useState('');
+  const [gastoMensal, setGastoMensal] = useState('');
   const [cargo, setCargo] = useState('');
   const [objetivo, setObjetivo] = useState('');
   const [loading, setLoading] = useState(false);
@@ -30,6 +31,7 @@ const Login: React.FC = () => {
             data: {
               nome: nome,
               renda_mensal: rendaMensal ? parseFloat(rendaMensal) : 0,
+              gasto_mensal: gastoMensal ? parseFloat(gastoMensal) :.0, 
               cargo: cargo,
               objetivo: objetivo  === 'outro' ? outroObjetivo : objetivo,
               objetivo_tipo: objetivo,
@@ -140,6 +142,23 @@ const Login: React.FC = () => {
                     step="0.01"
                     value={rendaMensal}
                     onChange={(e) => setRendaMensal(e.target.value)}
+                    className="glass-input w-full pl-10 px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
+                  />
+                </div>
+              </div>
+
+
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-dark-text-secondary mb-2">
+                  Gasto Mensal
+                </label>
+                <div className="relative">
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={gastoMensal}
+                    onChange={(e) => setGastoMensal(e.target.value)}
                     className="glass-input w-full pl-10 px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>
