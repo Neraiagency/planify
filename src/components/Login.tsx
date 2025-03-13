@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../services/supabase';
-import { BarChart2, DollarSign, Eye, EyeOff } from 'lucide-react';
+import Modal from './Modal';
+import { BarChart2, DollarSign, Eye, EyeOff,CheckCircle } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -15,6 +16,7 @@ const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [outroObjetivo, setOutroObjetivo] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +43,7 @@ const Login: React.FC = () => {
 
         if (error) throw error;
         
-        alert('Verificação enviada para seu email! Por favor verifique sua caixa de entrada.');
+        setShowSuccessModal(true);
       } else {
         // Login com usuário existente
         const { error } = await supabase.auth.signInWithPassword({
@@ -56,6 +58,22 @@ const Login: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleModalClose = () => {
+    setShowSuccessModal(false);
+    // Switch back to login view
+    setIsSignUp(false);
+    
+    // Clear form fields after success
+    setEmail('');
+    setPassword('');
+    setNome('');
+    setRendaMensal('');
+    setGastoMensal('');
+    setCargo('');
+    setObjetivo('');
+    setOutroObjetivo('');
   };
 
   return (
@@ -234,6 +252,17 @@ const Login: React.FC = () => {
           </button>
         </div>
       </div>
+
+      <Modal 
+        isOpen={showSuccessModal}
+        onClose={handleModalClose}
+        title="Cadastro Realizado!"
+        icon={<CheckCircle className="h-6 w-6 text-accent-green" />}
+        autoCloseTime={15000} // Fecha automaticamente após 5 segundos
+      >
+        <p>Verificação enviada para seu email! Por favor verifique sua caixa de entrada para ativar sua conta.</p>
+      </Modal>
+
     </div>
   );
 };
