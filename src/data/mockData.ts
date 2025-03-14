@@ -44,24 +44,39 @@ export const creditCards: CreditCard[] = [
 
 // Categories
 export const incomeCategories = [
-  'Salary',
-  'Freelance',
-  'Investments',
-  'Gifts',
-  'Other Income',
+  'Salário',
+  'Autônomo/Freelancer',   
+  'Pró-labore',
+  'Aposentadoria/Pensão',
+  'Investimentos',
+  'Renda Extra',
+  'Benefícios Sociais',
+  'Comissões/Bonificações',
+  'Rendimentos Financeiros',
+  'Vale-alimentação',
+  'vale-transporte', 
+  'Mesada',
+  'Outras Receitas'
 ];
 
 export const expenseCategories = [
-  'Food',
-  'Housing',
-  'Transportation',
-  'Entertainment',
-  'Health',
-  'Education',
-  'Shopping',
-  'Utilities',
-  'Travel',
-  'Other Expenses',
+  'Alimentação',
+  'Aluguel',
+  'Contas',   // Água, luz, internet, telefone, etc.
+  'Transporte',
+  'Saúde',
+  'Educação',
+  'Lazer',
+  'Streaming',
+  'Viagens',
+  'Vestuário',
+  'Cuidados Pessoais',
+  'Filhos',
+  'Assinaturas',
+  'Seguros',
+  'Impostos',
+  'Fatura do Cartão',
+  'Outros Gastos'
 ];
 
 // Generate transactions for the current month

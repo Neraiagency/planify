@@ -3,6 +3,7 @@ import { useFinance } from '../context/FinanceContext';
 import { formatCurrency } from '../utils/calculations';
 import { Edit2, Trash2, Plus, Check, Calendar, PlusCircle, MoreVertical } from 'lucide-react';
 import ToBePaidForm from './ToBePaidForm';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 const ToBePaidList: React.FC = () => {
   const { monthsData, currentMonthIndex, updateToBePaidStatus, deleteToBePaid } = useFinance();
@@ -14,6 +15,10 @@ const ToBePaidList: React.FC = () => {
     amount: number;
     status: 'paid' | 'pending' | 'scheduled';
   } | undefined>(undefined);
+  
+  // State for delete confirmation modal
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
   
   const actionsMenuRef = useRef<HTMLDivElement>(null);
   
@@ -76,10 +81,17 @@ const ToBePaidList: React.FC = () => {
   };
   
   const handleDeleteItem = (id: string) => {
-    if (window.confirm('Tem certeza que deseja excluir este item?')) {
-      deleteToBePaid(id);
-    }
+    setItemToDelete(id);
+    setDeleteModalOpen(true);
     setShowActionsFor(null);
+  };
+  
+  const confirmDelete = () => {
+    if (itemToDelete) {
+      deleteToBePaid(itemToDelete);
+      setItemToDelete(null);
+    }
+    setDeleteModalOpen(false);
   };
   
   const handleMarkAsPaid = (id: string) => {
@@ -302,6 +314,18 @@ const ToBePaidList: React.FC = () => {
         <ToBePaidForm
           onClose={handleCloseForm}
           editItem={editingItem}
+        />
+      )}
+      
+      {/* Modal de confirmação de exclusão */}
+      {deleteModalOpen && (
+        <DeleteConfirmationModal 
+          isOpen={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          onConfirm={confirmDelete}
+          title="Excluir Item a Pagar"
+          message="Tem certeza que deseja excluir este item? Esta ação não pode ser desfeita."
+          itemName={itemToDelete ? currentMonthData.toBePaid.find(item => item.id === itemToDelete)?.description : ''}
         />
       )}
     </div>

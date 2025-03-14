@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Edit2, Trash2, Plus, CreditCard, Calendar, Filter, PlusCircle, ChevronRight } from 'lucide-react';
 import TransactionForm from './TransactionForm';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 import { Transaction } from '../types';
 
 const TransactionList: React.FC = () => {
@@ -14,15 +15,26 @@ const TransactionList: React.FC = () => {
   const [filter, setFilter] = useState<string>('all');
   const [expandedTransaction, setExpandedTransaction] = useState<string | null>(null);
   
+  // States for delete confirmation modal
+  const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [transactionToDelete, setTransactionToDelete] = useState<string | null>(null);
+  
   const handleEditTransaction = (transaction: Transaction) => {
     setEditingTransaction(transaction);
     setShowTransactionForm(true);
   };
   
   const handleDeleteTransaction = (id: string) => {
-    if (window.confirm('Tem certeza que deseja excluir esta transação?')) {
-      deleteTransaction(id);
+    setTransactionToDelete(id);
+    setDeleteModalOpen(true);
+  };
+  
+  const confirmDelete = () => {
+    if (transactionToDelete) {
+      deleteTransaction(transactionToDelete);
+      setTransactionToDelete(null);
     }
+    setDeleteModalOpen(false);
   };
   
   const handleAddTransaction = () => {
@@ -338,6 +350,18 @@ const TransactionList: React.FC = () => {
         <TransactionForm
           onClose={handleCloseForm}
           editTransaction={editingTransaction}
+        />
+      )}
+      
+      {/* Modal de confirmação de exclusão */}
+      {deleteModalOpen && (
+        <DeleteConfirmationModal 
+          isOpen={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          onConfirm={confirmDelete}
+          title="Excluir Transação"
+          message="Tem certeza que deseja excluir esta transação? Esta ação não pode ser desfeita."
+          itemName={transactionToDelete ? filteredTransactions.find(t => t.id === transactionToDelete)?.description : ''}
         />
       )}
     </>
