@@ -4,7 +4,8 @@ import { Transaction, TransactionType, PaymentMethod, TransactionStatus } from '
 import { incomeCategories, expenseCategories } from '../data/mockData';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { PlusCircle, X, Calendar, DollarSign, Tag, CreditCard, CheckCircle, Layers } from 'lucide-react';
+import { PlusCircle, X, Calendar, Tag, CreditCard, CheckCircle, Layers } from 'lucide-react';
+import { NumericFormat } from 'react-number-format';
 
 interface TransactionFormProps {
   onClose: () => void;
@@ -132,14 +133,19 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onClose, editTransact
             <div>
               <label className="block text-xs sm:text-sm font-medium text-dark-text-secondary mb-1 sm:mb-2">Valor</label>
               <div className="relative">
-                <DollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 text-accent-orange" size={14} />
-                <input
-                  type="number"
-                  step="0.01"
-                  inputMode="decimal"
+                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium z-10">
+                    R$
+                 </span>
+                <NumericFormat
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  decimalScale={2}
+                  fixedDecimalScale
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
-                  className="glass-input w-full pl-7 pr-2 py-2 sm:py-2.5 rounded-lg text-dark-text focus:outline-none focus:ring-1 focus:ring-accent-orange text-xs sm:text-sm"
+                  onValueChange={(values) => {
+                    setAmount(values.floatValue ? values.floatValue.toString() : '');
+                  }}
+                  className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   required
                 />
               </div>
@@ -198,9 +204,6 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onClose, editTransact
                     className="glass-input appearance-none w-full pl-7 pr-1 py-2 sm:py-2.5 rounded-lg text-dark-text focus:outline-none focus:ring-1 focus:ring-accent-orange text-xs sm:text-sm"
                     required
                   >
-                    <option value="Nubank">Nubank</option>
-                    <option value="Inter">Inter</option>
-                    <option value="C6 Bank">C6 Bank</option>
                     <option value="Credit">Credito</option>
                     <option value="Debit">Débito</option>
                     <option value="Cash">Dinheiro</option>
@@ -250,14 +253,16 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onClose, editTransact
                   <label className="block text-xs sm:text-sm font-medium text-dark-text-secondary mb-1 sm:mb-2">Parcela Atual</label>
                   <div className="relative">
                     <Layers className="absolute left-2 top-1/2 transform -translate-y-1/2 text-accent-orange" size={14} />
-                    <input
-                      type="number"
-                      min="1"
-                      inputMode="numeric"
+                    <NumericFormat
+                      allowNegative={false}
+                      decimalScale={0}
                       value={currentInstallment}
-                      onChange={(e) => setCurrentInstallment(e.target.value)}
+                      onValueChange={(values) => {
+                        setCurrentInstallment(values.value);
+                      }}
                       className="glass-input w-full pl-7 pr-2 py-2 sm:py-2.5 rounded-lg text-dark-text focus:outline-none focus:ring-1 focus:ring-accent-orange text-xs sm:text-sm"
                       required={hasInstallments}
+                      min={1}
                     />
                   </div>
                 </div>
@@ -265,14 +270,16 @@ const TransactionForm: React.FC<TransactionFormProps> = ({ onClose, editTransact
                   <label className="block text-xs sm:text-sm font-medium text-dark-text-secondary mb-1 sm:mb-2">Total Parcelas</label>
                   <div className="relative">
                     <Layers className="absolute left-2 top-1/2 transform -translate-y-1/2 text-accent-orange" size={14} />
-                    <input
-                      type="number"
-                      min="1"
-                      inputMode="numeric"
+                    <NumericFormat
+                      allowNegative={false}
+                      decimalScale={0}
                       value={totalInstallments}
-                      onChange={(e) => setTotalInstallments(e.target.value)}
+                      onValueChange={(values) => {
+                        setTotalInstallments(values.value);
+                      }}
                       className="glass-input w-full pl-7 pr-2 py-2 sm:py-2.5 rounded-lg text-dark-text focus:outline-none focus:ring-1 focus:ring-accent-orange text-xs sm:text-sm"
                       required={hasInstallments}
+                      min={1}
                     />
                   </div>
                 </div>

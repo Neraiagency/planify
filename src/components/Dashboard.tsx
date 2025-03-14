@@ -3,7 +3,7 @@ import { useFinance } from '../context/FinanceContext';
 import { calculateMonthSummary, calculateCategorySummary, calculateMonthlyTrend, formatCurrency, getMonthName } from '../utils/calculations';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
-import { ArrowDownIcon, ArrowUpIcon, CreditCard, DollarSign, TrendingDown, TrendingUp, Calendar, PlusCircle } from 'lucide-react';
+import { ArrowDownIcon, ArrowUpIcon, CreditCard, TrendingDown, TrendingUp, Calendar, PlusCircle } from 'lucide-react';
 // Importar o componente de formulário de transação
 import TransactionForm from './TransactionForm';
 
@@ -249,7 +249,9 @@ const Dashboard: React.FC = () => {
                 </p>
               </div>
               <div className={`${summary.balance >= 0 ? 'bg-accent-green bg-opacity-10' : 'bg-accent-red bg-opacity-10'} p-3 rounded-lg`}>
-                <DollarSign className={`h-6 w-6 ${summary.balance >= 0 ? 'text-accent-green' : 'text-accent-red'}`} />
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                    R$
+                </span>
               </div>
             </div>
           </div>

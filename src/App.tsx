@@ -14,17 +14,17 @@ import ErrorMessage from './components/ErrorMessage';
 const AppContent: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<string>('dashboard');
   const { isLoading, error } = useFinance();
-  
+
   // Se estiver carregando os dados financeiros, mostra o spinner
   if (isLoading) {
     return <LoadingSpinner />;
   }
-  
+
   // Se houver erro, mostra a mensagem de erro
   if (error) {
     return <ErrorMessage message={error} onRetry={() => window.location.reload()} />;
   }
-  
+
   const renderPage = () => {
     switch (currentPage) {
       case 'dashboard':
@@ -39,11 +39,11 @@ const AppContent: React.FC = () => {
         return <Dashboard />;
     }
   };
-  
+
   return (
     <div className="flex h-screen bg-black text-dark-text">
       <Navbar currentPage={currentPage} onChangePage={setCurrentPage} />
-      
+
       <div className="flex-1 md:ml-64 flex flex-col">
         <main className="flex-1 overflow-y-auto bg-black">
           {renderPage()}
@@ -56,17 +56,17 @@ const AppContent: React.FC = () => {
 // Componente que só carrega o FinanceProvider se o usuário estiver autenticado
 const AuthenticatedApp = () => {
   const { session, loading } = useAuth();
-  
+
   // Se estiver carregando a autenticação, mostra o spinner
   if (loading) {
     return <LoadingSpinner />;
   }
-  
+
   // Se não houver sessão, mostra a tela de login
   if (!session) {
     return <Login />;
   }
-  
+
   return (
     <FinanceProvider>
       <AppContent />

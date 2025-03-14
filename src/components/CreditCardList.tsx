@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useFinance } from '../context/FinanceContext';
 import { formatCurrency } from '../utils/calculations';
-import { CreditCard as CreditCardIcon, AlertCircle, Edit2, DollarSign, Calendar, PlusCircle } from 'lucide-react';
+import { CreditCard as CreditCardIcon, AlertCircle, Edit2, Calendar, PlusCircle } from 'lucide-react';
 import { CreditCard } from '../types';
+import { NumericFormat } from 'react-number-format';
 
 const CreditCardList: React.FC = () => {
   const { creditCards, updateCreditCard, addCreditCard } = useFinance();
@@ -28,7 +29,7 @@ const CreditCardList: React.FC = () => {
     if (editingCard) {
       setEditingCard({
         ...editingCard,
-        [field]: typeof value === 'string' && field !== 'name' ? parseFloat(value) : value,
+        [field]: value,
       });
     }
   };
@@ -42,10 +43,14 @@ const CreditCardList: React.FC = () => {
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
     
+    // Substitui as vírgulas por pontos para fazer o parseFloat funcionar corretamente
+    const creditLimitStr = (formData.get('credit_limit') as string).replace(",", ".");
+    const usedStr = (formData.get('used') as string).replace(",", ".");
+    
     const newCard = {
       name: formData.get('name') as string,
-      credit_limit: parseFloat(formData.get('credit_limit') as string),
-      used: parseFloat(formData.get('used') as string),
+      credit_limit: parseFloat(creditLimitStr),
+      used: parseFloat(usedStr),
       dueDate: parseInt(formData.get('dueDate') as string),
       closingDate: parseInt(formData.get('closingDate') as string),
     };
@@ -117,10 +122,14 @@ const CreditCardList: React.FC = () => {
               <div>
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">Limite</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                  <input
-                    type="number"
-                    step="0.01"
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium z-10">
+                    R$
+                  </span>
+                  <NumericFormat
+                    thousandSeparator="."
+                    decimalSeparator=","
+                    decimalScale={2}
+                    fixedDecimalScale
                     name="credit_limit"
                     required
                     className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
@@ -130,14 +139,18 @@ const CreditCardList: React.FC = () => {
               <div>
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">Utilizado</label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                  <input
-                    type="number"
-                    step="0.01"
-                    name="used"
-                    required
-                    className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
-                  />
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                    R$
+                  </span>
+                    <NumericFormat
+                      thousandSeparator="."
+                      decimalSeparator=","
+                      decimalScale={2}
+                      fixedDecimalScale
+                      name="used"
+                      required
+                      className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
+                    />
                 </div>
               </div>
             </div>
@@ -224,12 +237,16 @@ const CreditCardList: React.FC = () => {
                   <div>
                     <label className="block text-sm font-medium text-dark-text-secondary mb-2">Limite</label>
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                      <input
-                        type="number"
-                        step="0.01"
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                      R$
+                    </span>
+                     <NumericFormat
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        decimalScale={2}
+                        fixedDecimalScale
                         value={editingCard.credit_limit}
-                        onChange={(e) => handleInputChange('credit_limit', e.target.value)}
+                        onValueChange={(values) => handleInputChange('credit_limit', values.floatValue || 0)}
                         className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                       />
                     </div>
@@ -237,12 +254,16 @@ const CreditCardList: React.FC = () => {
                   <div>
                     <label className="block text-sm font-medium text-dark-text-secondary mb-2">Utilizado</label>
                     <div className="relative">
-                      <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                      <input
-                        type="number"
-                        step="0.01"
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                        R$
+                      </span>
+                      <NumericFormat
+                        thousandSeparator="."
+                        decimalSeparator=","
+                        decimalScale={2}
+                        fixedDecimalScale
                         value={editingCard.used}
-                        onChange={(e) => handleInputChange('used', e.target.value)}
+                        onValueChange={(values) => handleInputChange('used', values.floatValue || 0)}
                         className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                       />
                     </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { supabase } from '../services/supabase';
 import Modal from './Modal';
-import { BarChart2, DollarSign, Eye, EyeOff,CheckCircle } from 'lucide-react';
+import { BarChart2, Eye, EyeOff,CheckCircle } from 'lucide-react';
+import { NumericFormat } from 'react-number-format';
 
 const Login: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -17,6 +18,31 @@ const Login: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [outroObjetivo, setOutroObjetivo] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+  const formatarMoeda = (e, setValor) => {
+    let valor = e.target.value;
+    
+    // Remove tudo que não for número
+    valor = valor.replace(/\D/g, '');
+    
+    // Converte para número e divide por 100 (para considerar os centavos)
+    const numero = valor ? Number(valor) / 100 : 0;
+    
+    // Formata o número para exibição
+    const valorFormatado = numero.toLocaleString('pt-BR', { 
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2 
+    });
+    
+    // Atualiza o campo exibido com o valor formatado
+    e.target.value = valorFormatado;
+    
+    // Armazena o valor numérico no estado (para enviar ao banco)
+    setValor(numero.toString());
+  }
+
+
+
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -154,12 +180,18 @@ const Login: React.FC = () => {
                   Renda Mensal
                 </label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                  <input
-                    type="number"
-                    step="0.01"
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                    R$
+                  </span>
+                  <NumericFormat
+                    thousandSeparator="."
+                    decimalSeparator=","
+                    decimalScale={2}
+                    fixedDecimalScale
                     value={rendaMensal}
-                    onChange={(e) => setRendaMensal(e.target.value)}
+                    onValueChange={(values) => {
+                      setRendaMensal(values.floatValue ? values.floatValue.toString() : '');
+                    }}
                     className="glass-input w-full pl-10 px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>
@@ -171,12 +203,18 @@ const Login: React.FC = () => {
                   Gasto Mensal
                 </label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                  <input
-                    type="number"
-                    step="0.01"
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                    R$
+                  </span>
+                  <NumericFormat
+                    thousandSeparator="."
+                    decimalSeparator=","
+                    decimalScale={2}
+                    fixedDecimalScale
                     value={gastoMensal}
-                    onChange={(e) => setGastoMensal(e.target.value)}
+                    onValueChange={(values) => {
+                      setGastoMensal(values.floatValue ? values.floatValue.toString() : '');
+                    }}
                     className="glass-input w-full pl-10 px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
                   />
                 </div>

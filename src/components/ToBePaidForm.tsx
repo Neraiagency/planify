@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useFinance } from '../context/FinanceContext';
 import { TransactionStatus } from '../types';
-import { X, DollarSign, CheckCircle } from 'lucide-react';
+import { X, CheckCircle } from 'lucide-react';
+import { NumericFormat } from 'react-number-format';
 
 interface ToBePaidFormProps {
   onClose: () => void;
@@ -67,15 +68,21 @@ const ToBePaidForm: React.FC<ToBePaidFormProps> = ({ onClose, editItem }) => {
             <div className="mb-5">
               <label className="block text-sm font-medium text-dark-text-secondary mb-2">Valor</label>
               <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent-orange" size={16} />
-                <input
-                  type="number"
-                  step="0.01"
+                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-dark-text-secondary font-medium">
+                   R$
+                 </span>
+                 <NumericFormat
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onValueChange={(values) => {
+                    setAmount(values.floatValue ? values.floatValue.toString() : '');
+                  }}
+                  thousandSeparator="."
+                  decimalSeparator=","
+                  decimalScale={2}
+                  fixedDecimalScale
+                  disabled={!!editItem}
                   className="glass-input w-full pl-10 pr-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-blue"
                   required
-                  disabled={!!editItem}
                 />
               </div>
             </div>
