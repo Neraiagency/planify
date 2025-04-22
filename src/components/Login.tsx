@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { supabase } from '../services/supabase';
 import Modal from './Modal';
-import { BarChart2, Eye, EyeOff,CheckCircle } from 'lucide-react';
+import { BarChart2, Eye, EyeOff,CheckCircle, Phone  } from 'lucide-react';
 import { NumericFormat } from 'react-number-format';
+import InputMask from 'react-input-mask'; 
+import { FaWhatsapp } from 'react-icons/fa';
 
 const Login: React.FC = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [nome, setNome] = useState('');
   const [rendaMensal, setRendaMensal] = useState('');
@@ -52,12 +55,20 @@ const Login: React.FC = () => {
     try {
       if (isSignUp) {
         // Criar novo usuário
+        const phoneDigits = phone ? phone.replace(/\D/g, '') : '';
+        if (phoneDigits && phoneDigits.length < 10) {
+          setError('Número de telefone inválido. Por favor, inclua DDD e número');
+          setLoading(false);
+          return;
+        }
+
         const { error } = await supabase.auth.signUp({
           email,
           password,
           options: {
             data: {
               nome: nome,
+              telefone: phone ? `+55${phone.replace(/\D/g, '')}` : null,
               renda_mensal: rendaMensal ? parseFloat(rendaMensal) : 0,
               gasto_mensal: gastoMensal ? parseFloat(gastoMensal) :.0, 
               cargo: cargo,
@@ -95,6 +106,7 @@ const Login: React.FC = () => {
     setEmail('');
     setPassword('');
     setNome('');
+    setPhone('');
     setRendaMensal('');
     setGastoMensal('');
     setCargo('');
@@ -174,6 +186,24 @@ const Login: React.FC = () => {
                   required
                 />
               </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-dark-text-secondary mb-2">
+              WhatsApp
+            </label>
+            <div className="relative">
+              <FaWhatsapp 
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-500" 
+                size={16}
+              />
+              <InputMask
+                mask="(99) 99999-9999" 
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="glass-input w-full pl-10 px-4 py-2 rounded-lg text-dark-text focus:outline-none focus:ring-2 focus:ring-accent-orange"
+              />
+            </div>
+          </div>
 
               <div className="mb-4">
                 <label className="block text-sm font-medium text-dark-text-secondary mb-2">
